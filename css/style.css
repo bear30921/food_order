@@ -431,3 +431,8 @@ template {
 [hidden] {
   display: none;
 }
+
+#map {
+  height: 400px;
+  width: 100%;
+}

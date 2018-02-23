@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="css/style.css">
-	<title>新北市旅遊網</title>
+	<title>新北市觀光旅遊景點</title>
 </head>
+
 <body>
-	
+	<header>
+		<h1>台北輕旅行</h1>
+		<select name="area" class="area">
+			<option value="volvo">Volvo</option>
+			<option value="saab">Saab</option>
+			<option value="opel">Opel</option>
+			<option value="audi">Audi</option>
+		</select>
+	</header>
+	<div id="map"></div>
+	<script src="javascript/data.js">
+	</script>
+	<script src="javascript/main.js">
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVEDEvNaxmK5t1_cHty_G7US_4JBBvHnc&callback=initMap" async
+	  defer></script>
 </body>
+
 </html>
