@@ -483,10 +483,6 @@ img {
 
 .places-list .place {
   margin-top: 40px;
-  -webkit-flex-grow: 1;
-  -moz-flex-grow: 1;
-  -ms-flex-grow: 1;
-  flex-grow: 1;
   -webkit-flex-basis: calc(50% - 20px);
   -moz-flex-basis: calc(50% - 20px);
   -ms-flex-basis: calc(50% - 20px);
