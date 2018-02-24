@@ -1,7 +1,5 @@
 var map;
 
-// data 已經在main.js宣告過了
-data = data.result.results;
 
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
@@ -31,20 +29,31 @@ function getData() {
 
 }
 
-console.log(data[0].file);
 
-var area = document.querySelector('.area');
+var areaList = document.querySelector('.area-list');
 var placesList = document.querySelector('.places-list');
-
 var str = '';
-for (var i = 0; i < data.length; i++) {
-	var place = '<div class="place"><div class="caption"><img src="'+  +'" alt=""><h3>標題</h3></div><div class="info"><p>地址</p><p>電話</p><p>時間</p><a href="javascript:;" class="btn">景點介紹</a></div></div>';
+
+for (var i = 0; i < 10; i++) {
+	// 景點名稱
+	var notAvailable = '尚未提供';
+	var placeImg;
+	var placeTitle = data[i].stitle || notAvailable;
+	var placeArea = data[i].address.substr(5, 3) || notAvailable;
+	var placeType = data[i].CAT2 || notAvailable;
+	var placeAddress = data[i].address || notAvailable;
+	var placeTel = data[i].MEMO_TEL || notAvailable;
+
+	if (data[i].file.img.length === undefined) {
+		placeImg = data[i].file.img['#text'] || '';
+	} else {
+		placeImg = data[i].file.img[0]['#text'] || '';
+	}
+	var place = '<li class="place" data-index="' + [i] + '"><div class="caption"><img src="' + placeImg + '" alt=""><h3 class="title">' + placeTitle + '</h3><div class="area">' + placeArea + '</div></div><div class="info"><p class="type">類型：' + placeType + '</p><p>地址：' + placeAddress + '</p><p>電話：' + placeTel + '</p><a href="javascript:;" class="btn">景點介紹</a></div></li>';
 	str += place;
 
 	// var s = '012345';
 	// a = data[i].substring(0, data.indexOf('jpg'));
-	
+
 }
 placesList.innerHTML = str;
-
-
