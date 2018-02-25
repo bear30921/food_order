@@ -9,6 +9,13 @@
 	max-width: 1000px;
 }
 
+.stop-scrolling {
+	height: 100%;
+	overflow-y: hidden;
+}
+
+
+
 .places-list {
 	@include flexbox;
 	@include flex-wrap(wrap);
@@ -26,7 +33,6 @@
 			position: relative;
 			height: 18vw;
 			overflow: hidden;
-			
 		}
 		img {
 			width: 100%;
@@ -78,6 +84,55 @@
 				@include prefix(box-orient, vertical);
 				overflow: hidden;
 			}
+		}
+	}
+}
+
+.screen {
+	display: none;
+	background-color: rgba(0, 0, 0, 0.8);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	.view-box {
+		background-color: white;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		padding: 20px; // 響應式下絕對定位設定寬max-width會失效，解決方法使用width
+		width: 80%;
+		max-width: 500px;
+		@include prefix(transform, translate(-50%, -50%));
+		.box {
+			// 要加拉桿 記得要加高度
+			overflow: auto;
+			height: 650px;
+		}
+		.picture {
+			margin-bottom: 40px;
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
+		p {
+			line-height: 2;
+		}
+		.cancel {
+			position: absolute;
+			z-index: 999;
+			top: -30px;
+			right: -20px;
+			color: white;
+			width: 50px;
+			height: 50px;
+			background-color: grey;
+			@include prefix(border-radius, 50%);
+			text-align: center;
+			line-height: 50px;
+			cursor: pointer;
 		}
 	}
 }
