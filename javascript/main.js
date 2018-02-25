@@ -145,7 +145,7 @@ function renderData() {
 		}
 
 		      
-		var place = '<li class="place" data-index="' + (i+1) + '"><div class="caption"><img src="' + placeImg + '" alt=""><h3 class="title">' + placeTitle + '</h3><div class="area">' + placeArea + '</div></div><div class="info"><p class="type">類型：' + placeType + '</p><p>電話：' + placeTel + '</p><p>地址：' + placeAddress + '</p><a href="javascript:;" class="btn">景點介紹</a></div></li>';
+		var place = '<li class="place" data-index="' + (i+1) + '"><div class="caption"><img src="' + placeImg + '" alt=""><h3 class="title">' + placeTitle + '</h3><div class="area">' + placeArea + '</div></div><div class="info"><p class="type">類型：' + placeType + '</p><p>電話：' + placeTel + '</p><p>地址：' + placeAddress + '</p><a href="javascript:;" class="detail">景點介紹</a></div></li>';
 
 		      
 		str += place;  
@@ -177,7 +177,7 @@ function filterData(area) {  
 				placeImg = data[i].file.img[0]['#text'] || '';      
 			}
 
-			var place = '<li class="place" data-index="' + (i+1) + '"><div class="caption"><img src="' + placeImg + '" alt=""><h3 class="title">' + placeTitle + '</h3><div class="area">' + placeArea + '</div></div><div class="info"><p class="type">類型：' + placeType + '</p><p>地址：' + placeAddress + '</p><p>電話：' + placeTel + '</p><a href="javascript:;" class="btn detail">景點介紹</a></div></li>';
+			var place = '<li class="place" data-index="' + (i+1) + '"><div class="caption"><img src="' + placeImg + '" alt=""><h3 class="title">' + placeTitle + '</h3><div class="area">' + placeArea + '</div></div><div class="info"><p class="type">類型：' + placeType + '</p><p>地址：' + placeAddress + '</p><p>電話：' + placeTel + '</p><a href="javascript:;" class="detail">景點介紹</a></div></li>';
 
 			str += place;  
 		}
@@ -210,12 +210,12 @@ areaList.addEventListener('change', function (e) { 
 });
 
 // 打開景點介紹
-var viewDetail = document.querySelector('.views');
+var viewDetail = document.querySelector('.places-list');
 viewDetail.addEventListener('click', function (e) {
 	var currentView = e.target;
 	var currentHTML = document.querySelector("html");
 	currentHTML.classList.add("stop-scrolling");
-	if (currentView.tagName === 'A') {
+	if (currentView.getAttribute('class') === 'detail') {
 		document.querySelector('.screen').style.display = 'block';
 		var currentDom = currentView.parentElement.parentElement;
 		for (var i in data) {
@@ -260,7 +260,23 @@ screen.addEventListener('click', function (e) {
 	if (cancelBtn.getAttribute('class') === 'screen' || cancelBtn.getAttribute('class') === 'cancel') {
 		document.querySelector('.screen').style.display = 'none';
 	}
-})
+}, false);
+
+
+$('#pagination-demo').twbsPagination({
+	totalPages: 32,
+	visiblePages: 5,
+	onPageClick: function (event, page) {
+			$('#page-content').text('Page ' + page);
+	}
+});
+
+
+
+
+//頁數呈顯資料
+var pages = document.getElementById('pagination-demo');
+console.log(pages);
 
 
 
@@ -268,6 +284,7 @@ screen.addEventListener('click', function (e) {
 // var number = 10;
 // var total = data.length + 1;
 // var totalPage = Math.ceil(total / number);
+// console.log(totalPage);
 // var ul_list = document.createElement('ul');
 // ul_list.setAttribute('class', 'pages');
 
@@ -279,5 +296,8 @@ screen.addEventListener('click', function (e) {
 // ul_list.innerHTML = str;
 
 // document.querySelector('.views .container').appendChild(ul_list);
+
+
+
 
 window.onload = renderData();
