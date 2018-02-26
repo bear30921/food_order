@@ -91,7 +91,7 @@ var areaLocation = [{
 	}
 }
 ];
-
+// 儲存地區區域經緯度位置
 var areaLat;
 var areaLng;
 
@@ -104,12 +104,10 @@ function initMap() {  
 		},
 		    zoom: 14  
 	});
-
-	  
 	getData();
 }
 
-// 景點資料
+// 初始化地圖標記
 function getData() {  
 	for (var i = 0; i < data.length; i++) {    
 		var box = {};    
@@ -123,12 +121,12 @@ function getData() {  
 		new google.maps.Marker(box);  
 	}
 }
-
+// 一開始進入瀏覽器宣染資料
 function renderData() {
 	var str = ''; 
 	var placesList = document.querySelector('.places-list');  
 	placesList.innerHTML = '';
-	for (var i = 0; i < 50; i++) {
+	for (var i = 0; i < 20; i++) {
 
 		var notAvailable = '尚未提供';      
 		var placeImg;      
@@ -144,23 +142,19 @@ function renderData() {
 			placeImg = data[i].file.img[0]['#text'] || '';      
 		}
 
-		      
 		var place = '<li class="place" data-index="' + (i+1) + '"><div class="caption"><img src="' + placeImg + '" alt=""><h3 class="title">' + placeTitle + '</h3><div class="area">' + placeArea + '</div></div><div class="info"><p class="type">類型：' + placeType + '</p><p>電話：' + placeTel + '</p><p>地址：' + placeAddress + '</p><a href="javascript:;" class="detail">景點介紹</a></div></li>';
-
 		      
 		str += place;  
-
-
 	}  
 	placesList.innerHTML = str;
 }
 
-
+// 篩選資料
 function filterData(area) {  
 	var str = ''; 
 	var placesList = document.querySelector('.places-list');  
 	placesList.innerHTML = '';
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < 20; i++) {
 		if (area === data[i].address.substr(5, 3)) {
 
 			var notAvailable = '尚未提供';      
@@ -169,8 +163,8 @@ function filterData(area) {  
 			var placeArea = data[i].address.substr(5, 3) || notAvailable;      
 			var placeType = data[i].CAT2 || notAvailable;      
 			var placeAddress = data[i].address || notAvailable;      
-			var placeTel = data[i].MEMO_TEL || notAvailable;       // 防止有些圖片不是以陣列排序
-			      
+			var placeTel = data[i].MEMO_TEL || notAvailable;
+			// 防止有些圖片不是以陣列排序
 			if (data[i].file.img.length === undefined) {        
 				placeImg = data[i].file.img['#text'] || '';      
 			} else {        
@@ -187,9 +181,8 @@ function filterData(area) {  
 }
 
 
-
+// 下拉選單地區切換
 var areaList = document.querySelector('.area-list');
-
 areaList.addEventListener('change', function (e) { 
 	var currentValue = e.target.value;
 	
@@ -245,7 +238,6 @@ viewDetail.addEventListener('click', function (e) {
 				document.querySelector('.view-time').textContent = placeTime;
 				document.querySelector('.view-detail').textContent = placeDetail;
 			}
-			
 		}
 	}
 }, false);
@@ -262,42 +254,63 @@ screen.addEventListener('click', function (e) {
 	}
 }, false);
 
+//  回到最頂層
+$('#top').on('click', function (e) {
+	e.preventDefault();
+	$('html, body').stop().animate({
+		scrollTop: 0
+	}, 1000);
+});
 
-$('#pagination-demo').twbsPagination({
-	totalPages: 32,
-	visiblePages: 5,
-	onPageClick: function (event, page) {
-			$('#page-content').text('Page ' + page);
+// goTop 動畫樣式
+$(window).on('scroll', function () {
+	var $scroll = $(window).scrollTop();
+	if ($scroll >= 600) {
+		$('#top').addClass('active');
+	} else {
+		$('#top').removeClass('active');
 	}
 });
 
 
 
 
-//頁數呈顯資料
-var pages = document.getElementById('pagination-demo');
-console.log(pages);
+window.onload = renderData();
 
 
 
 
+
+
+
+
+
+// 尚未完成頁碼
 // var number = 10;
 // var total = data.length + 1;
 // var totalPage = Math.ceil(total / number);
 // console.log(totalPage);
 // var ul_list = document.createElement('ul');
 // ul_list.setAttribute('class', 'pages');
-
+//
 // var str = '';
 // for (var i = 0; i < totalPage; i++){
 // 	var pageNo = '<li><a href="javascript:;" class="pageNo" data-page="' + (i+1) + '">'+ (i+1) +'</a></li>';
 // 	str += pageNo;
 // }
 // ul_list.innerHTML = str;
-
+//
 // document.querySelector('.views .container').appendChild(ul_list);
 
 
+// $('#pagination-demo').twbsPagination({
+// 	totalPages: 32,
+// 	visiblePages: 5,
+// 	onPageClick: function (event, page) {
+// 			$('#page-content').text('Page ' + page);
+// 	}
+// });
 
 
-window.onload = renderData();
+
+

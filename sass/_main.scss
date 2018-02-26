@@ -19,6 +19,47 @@
 	height: 500px;
 }
 
+header {
+	background-image: url("/img/city.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 50% 40%;
+	width: 100vw;
+	height: 350px;
+	text-align: center;
+	.container {
+		position: relative;
+		top: 50%;
+		@include prefix(transform, translateY(-50%));
+	}	
+	.backgroound {
+		background-color: rgba(0, 0, 0, 0.5);
+		border: 1px solid white;
+		padding: 40px 0;
+	}
+	h1 {
+		color: white;
+		letter-spacing: 20px;
+	}
+	select {
+		margin-top: 40px;
+		width: 100%;
+		max-width: 200px;
+		padding: 20px;
+		@include prefix(appearance, none);
+		padding: 10px 20px;
+		text-align-last:center;
+		
+	}
+}
+
+.views {
+	h2 {
+		font-size: 1.8em;
+		text-align: center;
+		padding-top: 40px;
+	}
+}
 
 .places-list {
 	@include flexbox;
@@ -69,11 +110,15 @@
 			display: block;
 			max-width: 100px;
 			padding: 10px 0;
-			background-color: #9055A2;
+			background-color: rgb(105, 147, 227);
 			color: white;
-			border-radius: 2px;
+			@include prefix(border-radius, 2px);
+			@include prefix(transition, all .4s);
 			margin: 0 auto 20px auto;
 			text-align: center;
+			&:hover {
+				background-color: rgb(85, 99, 210);
+			}
 		}
 		p {
 			&:nth-child(2) {
@@ -141,15 +186,49 @@
 	}
 }
 
-#pagination-demo {
-	@include flexbox;
-	@include justify-content(center);
-	margin-top: 60px;
-	.page-item {
-		border: 1px solid #ddd;
-		padding: 10px;
-		&:not(:first-child) {
-			margin-left: 10px;
-		}
+#top {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	width: 60px;
+	height: 60px;
+	text-align: center;
+	line-height: 60px;
+	background-color: rgba(128, 128, 128, 0.8);
+	color: white;
+	opacity: 0;
+	@include prefix(border-radius, 50%);
+	@include prefix(transition, all .4s);
+	cursor: pointer;
+	&.active {
+		opacity: 1;
 	}
 }
+
+
+footer {
+	margin-top: 100px;
+	background-color: rgb(242, 240, 240);
+	padding-top: 40px;
+	padding-bottom: 40px;
+	text-align: center;
+	a {
+		text-decoration: underline;
+	}
+}
+
+
+
+// 尚未完成頁碼
+// #pagination-demo {
+// 	@include flexbox;
+// 	@include justify-content(center);
+// 	margin-top: 60px;
+// 	.page-item {
+// 		border: 1px solid #ddd;
+// 		padding: 10px;
+// 		&:not(:first-child) {
+// 			margin-left: 10px;
+// 		}
+// 	}
+// }
