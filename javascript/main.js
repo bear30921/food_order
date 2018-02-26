@@ -1,95 +1,96 @@
 var map;
+// 地區座標位置
 var areaLocation = [{
-	area: "台北市",
-	location: {      
-		lat: 25.0369639,
-		lng: 121.5361861
+		area: "台北市",
+		location: {      
+			lat: 25.0369639,
+			lng: 121.5361861
+		}
+	},
+	{
+		area: "中正區",
+		location: {      
+			lat: 25.0292998,
+			lng: 121.5030736
+		}
+	},
+	{
+		area: "大同區",
+		location: {      
+			lat: 25.0645017,
+			lng: 121.4958052
+		}
+	},
+	{
+		area: "中山區",
+		location: {      
+			lat: 25.0685018,
+			lng: 121.5280918
+		}
+	},
+	{
+		area: "松山區",
+		location: {      
+			lat: 25.0601717,
+			lng: 121.5417977
+		}
+	},
+	{
+		area: "大安區",
+		location: {      
+			lat: 25.0263064,
+			lng: 121.5263363
+		}
+	},
+	{
+		area: "萬華區",
+		location: {      
+			lat: 25.0294925,
+			lng: 121.4803742
+		}
+	},
+	{
+		area: "信義區",
+		location: {      
+			lat: 25.0287132,
+			lng: 121.5548065
+		}
+	},
+	{
+		area: "士林區",
+		location: {      
+			lat: 25.1347637,
+			lng: 121.462405
+		}
+	},
+	{
+		area: "北投區",
+		location: {      
+			lat: 25.1531443,
+			lng: 121.4824091
+		}
+	},
+	{
+		area: "內湖區",
+		location: {      
+			lat: 25.0834976,
+			lng: 121.5553559
+		}
+	},
+	{
+		area: "南港區",
+		location: {      
+			lat: 25.0383878,
+			lng: 121.5869684
+		}
+	},
+	{
+		area: "文山區",
+		location: {      
+			lat: 24.9880031,
+			lng: 121.540252
+		}
 	}
-},
-{
-	area: "中正區",
-	location: {      
-		lat: 25.0292998,
-		lng: 121.5030736
-	}
-},
-{
-	area: "大同區",
-	location: {      
-		lat: 25.0645017,
-		lng: 121.4958052
-	}
-},
-{
-	area: "中山區",
-	location: {      
-		lat: 25.0685018,
-		lng: 121.5280918
-	}
-},
-{
-	area: "松山區",
-	location: {      
-		lat: 25.0601717,
-		lng: 121.5417977
-	}
-},
-{
-	area: "大安區",
-	location: {      
-		lat: 25.0263064,
-		lng: 121.5263363
-	}
-},
-{
-	area: "萬華區",
-	location: {      
-		lat: 25.0294925,
-		lng: 121.4803742
-	}
-},
-{
-	area: "信義區",
-	location: {      
-		lat: 25.0287132,
-		lng: 121.5548065
-	}
-},
-{
-	area: "士林區",
-	location: {      
-		lat: 25.1347637,
-		lng: 121.462405
-	}
-},
-{
-	area: "北投區",
-	location: {      
-		lat: 25.1531443,
-		lng: 121.4824091
-	}
-},
-{
-	area: "內湖區",
-	location: {      
-		lat: 25.0834976,
-		lng: 121.5553559
-	}
-},
-{
-	area: "南港區",
-	location: {      
-		lat: 25.0383878,
-		lng: 121.5869684
-	}
-},
-{
-	area: "文山區",
-	location: {      
-		lat: 24.9880031,
-		lng: 121.540252
-	}
-}
 ];
 // 儲存地區區域經緯度位置
 var areaLat;
@@ -100,9 +101,106 @@ function initMap() {  
 	map = new google.maps.Map(document.getElementById('map'), {    
 		center: {      
 			lat: areaLat || 25.0369639,
-			lng: areaLng ||  121.5361861   
+			lng: areaLng ||  121.5361861   
 		},
-		    zoom: 14  
+		zoom: 14,
+		styles: [{
+				"featureType": "landscape",
+				"stylers": [{
+						"hue": "#FFBB00"
+					},
+					{
+						"saturation": 43.400000000000006
+					},
+					{
+						"lightness": 37.599999999999994
+					},
+					{
+						"gamma": 1
+					}
+				]
+			},
+			{
+				"featureType": "road.highway",
+				"stylers": [{
+						"hue": "#FFC200"
+					},
+					{
+						"saturation": -61.8
+					},
+					{
+						"lightness": 45.599999999999994
+					},
+					{
+						"gamma": 1
+					}
+				]
+			},
+			{
+				"featureType": "road.arterial",
+				"stylers": [{
+						"hue": "#FF0300"
+					},
+					{
+						"saturation": -100
+					},
+					{
+						"lightness": 51.19999999999999
+					},
+					{
+						"gamma": 1
+					}
+				]
+			},
+			{
+				"featureType": "road.local",
+				"stylers": [{
+						"hue": "#FF0300"
+					},
+					{
+						"saturation": -100
+					},
+					{
+						"lightness": 52
+					},
+					{
+						"gamma": 1
+					}
+				]
+			},
+			{
+				"featureType": "water",
+				"stylers": [{
+						"hue": "#0078FF"
+					},
+					{
+						"saturation": -13.200000000000003
+					},
+					{
+						"lightness": 2.4000000000000057
+					},
+					{
+						"gamma": 1
+					}
+				]
+			},
+			{
+				"featureType": "poi",
+				"stylers": [{
+						"hue": "#00FF6A"
+					},
+					{
+						"saturation": -1.0989010989011234
+					},
+					{
+						"lightness": 11.200000000000017
+					},
+					{
+						"gamma": 1
+					}
+				]
+			}
+		]
 	});
 	getData();
 }
@@ -116,8 +214,7 @@ function getData() {  
 		place.lng = Number(data[i].longitude);    
 		box.map = map;    
 		box.title = data[i].stitle;    
-		box.position = place;    
-		    
+		box.position = place;        
 		new google.maps.Marker(box);  
 	}
 }
@@ -126,7 +223,7 @@ function renderData() {
 	var str = ''; 
 	var placesList = document.querySelector('.places-list');  
 	placesList.innerHTML = '';
-	for (var i = 0; i < 20; i++) {
+	for (var i = 0; i < data.length; i++) {
 
 		var notAvailable = '尚未提供';      
 		var placeImg;      
@@ -142,8 +239,7 @@ function renderData() {
 			placeImg = data[i].file.img[0]['#text'] || '';      
 		}
 
-		var place = '<li class="place" data-index="' + (i+1) + '"><div class="caption"><img src="' + placeImg + '" alt=""><h3 class="title">' + placeTitle + '</h3><div class="area">' + placeArea + '</div></div><div class="info"><p class="type">類型：' + placeType + '</p><p>電話：' + placeTel + '</p><p>地址：' + placeAddress + '</p><a href="javascript:;" class="detail">景點介紹</a></div></li>';
-		      
+		var place = '<li class="place" data-index="' + (i + 1) + '"><div class="caption"><img src="' + placeImg + '" alt=""><h3 class="title">' + placeTitle + '</h3><div class="area">' + placeArea + '</div></div><div class="info"><p class="type">類型：' + placeType + '</p><p>電話：' + placeTel + '</p><p>地址：' + placeAddress + '</p><a href="javascript:;" class="detail">景點介紹</a></div></li>';      
 		str += place;  
 	}  
 	placesList.innerHTML = str;
@@ -154,7 +250,7 @@ function filterData(area) {  
 	var str = ''; 
 	var placesList = document.querySelector('.places-list');  
 	placesList.innerHTML = '';
-	for (var i = 0; i < 20; i++) {
+	for (var i = 0; i < data.length; i++) {
 		if (area === data[i].address.substr(5, 3)) {
 
 			var notAvailable = '尚未提供';      
@@ -171,7 +267,7 @@ function filterData(area) {  
 				placeImg = data[i].file.img[0]['#text'] || '';      
 			}
 
-			var place = '<li class="place" data-index="' + (i+1) + '"><div class="caption"><img src="' + placeImg + '" alt=""><h3 class="title">' + placeTitle + '</h3><div class="area">' + placeArea + '</div></div><div class="info"><p class="type">類型：' + placeType + '</p><p>地址：' + placeAddress + '</p><p>電話：' + placeTel + '</p><a href="javascript:;" class="detail">景點介紹</a></div></li>';
+			var place = '<li class="place" data-index="' + (i + 1) + '"><div class="caption"><img src="' + placeImg + '" alt=""><h3 class="title">' + placeTitle + '</h3><div class="area">' + placeArea + '</div></div><div class="info"><p class="type">類型：' + placeType + '</p><p>地址：' + placeAddress + '</p><p>電話：' + placeTel + '</p><a href="javascript:;" class="detail">景點介紹</a></div></li>';
 
 			str += place;  
 		}
@@ -185,14 +281,16 @@ function filterData(area) {  
 var areaList = document.querySelector('.area-list');
 areaList.addEventListener('change', function (e) { 
 	var currentValue = e.target.value;
-	
+
 	for (var i in areaLocation) {
 		if (currentValue === "台北市") {
+			// 更新地圖位置
 			areaLat = 25.0369639;
 			areaLng = 121.5361861;
 			renderData();
 			initMap();
 		} else if (currentValue === areaLocation[i].area) {
+			// 更新地圖位置
 			areaLat = areaLocation[i].location.lat;
 			areaLng = areaLocation[i].location.lng;
 			filterData(currentValue);
@@ -221,7 +319,7 @@ viewDetail.addEventListener('click', function (e) {
 				var placeTel = data[i].MEMO_TEL || notAvailable;    
 				var placeAddress = data[i].address || notAvailable;   
 				var placeMrt = data[i].MRT || notAvailable;   
-				var placeTime = data[i].MEMO_TIME || notAvailable;  
+				var placeTime = data[i].MEMO_TIME || notAvailable; 
 				var placeDetail = data[i].xbody || notAvailable; 
 				if (data[i].file.img.length === undefined) {        
 					placeImg = data[i].file.img['#text'] || '';      
@@ -272,9 +370,7 @@ $(window).on('scroll', function () {
 	}
 });
 
-
-
-
+// 載入資料
 window.onload = renderData();
 
 
@@ -310,7 +406,3 @@ window.onload = renderData();
 // 			$('#page-content').text('Page ' + page);
 // 	}
 // });
-
-
-
-
