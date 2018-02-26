@@ -667,6 +667,7 @@ header select {
   display: none;
   background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
+  z-index: 999;
   top: 0;
   left: 0;
   width: 100%;
@@ -690,7 +691,7 @@ header select {
 
 .screen .view-box .box {
   overflow: auto;
-  height: 650px;
+  max-height: 600px;
 }
 
 .screen .view-box .picture {
@@ -727,6 +728,7 @@ header select {
 
 #top {
   position: fixed;
+  z-index: 60;
   right: 20px;
   bottom: 20px;
   width: 60px;
