@@ -218,63 +218,56 @@ function getData() {  
 		new google.maps.Marker(box);  
 	}
 }
+
+function originData(index) {
+
+	var notAvailable = '尚未提供';      
+	var placeImg;      
+	var placeTitle = data[index].stitle || notAvailable;      
+	var placeArea = data[index].address.substr(5, 3) || notAvailable;
+	var placeType = data[index].CAT2 || notAvailable;      
+	var placeAddress = data[index].address || notAvailable;      
+	var placeTel = data[index].MEMO_TEL || notAvailable;
+	
+	// 防止有些圖片不是以陣列排序
+	if (data[index].file.img.length === undefined) {        
+		placeImg = data[index].file.img['#text'] || '';      
+	} else {        
+		placeImg = data[index].file.img[0]['#text'] || '';      
+	}
+
+	var place = '<li class="place" data-index="' + (index + 1) + '"><div class="caption"><img src="' + placeImg + '" alt=""><h3 class="title">' + placeTitle + '</h3><div class="area">' + placeArea + '</div></div><div class="info"><p class="type">類型：' + placeType + '</p><p>電話：' + placeTel + '</p><p>地址：' + placeAddress + '</p><a href="javascript:;" class="detail">景點介紹</a></div></li>';      
+	return place;  
+
+}
+
 // 一開始進入瀏覽器宣染資料
-function renderData() {
-	var str = ''; 
+function renderData(area = '', dataCount = data.length) {
+	var matchData = ''; 
+	var defaultData = '';
 	var placesList = document.querySelector('.places-list');  
 	placesList.innerHTML = '';
-	for (var i = 0; i < data.length; i++) {
-
-		var notAvailable = '尚未提供';      
-		var placeImg;      
-		var placeTitle = data[i].stitle || notAvailable;      
-		var placeArea = data[i].address.substr(5, 3) || notAvailable;      
-		var placeType = data[i].CAT2 || notAvailable;      
-		var placeAddress = data[i].address || notAvailable;      
-		var placeTel = data[i].MEMO_TEL || notAvailable;       // 防止有些圖片不是以陣列排序
-		      
-		if (data[i].file.img.length === undefined) {        
-			placeImg = data[i].file.img['#text'] || '';      
-		} else {        
-			placeImg = data[i].file.img[0]['#text'] || '';      
-		}
-
-		var place = '<li class="place" data-index="' + (i + 1) + '"><div class="caption"><img src="' + placeImg + '" alt=""><h3 class="title">' + placeTitle + '</h3><div class="area">' + placeArea + '</div></div><div class="info"><p class="type">類型：' + placeType + '</p><p>電話：' + placeTel + '</p><p>地址：' + placeAddress + '</p><a href="javascript:;" class="detail">景點介紹</a></div></li>';      
-		str += place;  
-	}  
-	placesList.innerHTML = str;
+	var flag = false;
+	for (var i = 0; i < dataCount; i++) {
+		// 當下拉選單改變時呈現資料
+		if (area != '' && area === data[i].address.substr(5, 3)) {
+			flag = true;
+			var newData = originData(i);
+			matchData += newData;
+		} 
+		// 網頁載入時預設呈現資料
+			var newData = originData(i);
+			defaultData += newData;
+	} 
+	// flag 預設是false，當下拉選單有值條件成立，flag變成true
+	if (flag) {
+		placesList.innerHTML = matchData;
+	}  else {
+		placesList.innerHTML = defaultData;
+	}
+	
 }
 
-// 篩選資料
-function filterData(area) {  
-	var str = ''; 
-	var placesList = document.querySelector('.places-list');  
-	placesList.innerHTML = '';
-	for (var i = 0; i < data.length; i++) {
-		if (area === data[i].address.substr(5, 3)) {
-
-			var notAvailable = '尚未提供';      
-			var placeImg;      
-			var placeTitle = data[i].stitle || notAvailable;      
-			var placeArea = data[i].address.substr(5, 3) || notAvailable;      
-			var placeType = data[i].CAT2 || notAvailable;      
-			var placeAddress = data[i].address || notAvailable;      
-			var placeTel = data[i].MEMO_TEL || notAvailable;
-			// 防止有些圖片不是以陣列排序
-			if (data[i].file.img.length === undefined) {        
-				placeImg = data[i].file.img['#text'] || '';      
-			} else {        
-				placeImg = data[i].file.img[0]['#text'] || '';      
-			}
-
-			var place = '<li class="place" data-index="' + (i + 1) + '"><div class="caption"><img src="' + placeImg + '" alt=""><h3 class="title">' + placeTitle + '</h3><div class="area">' + placeArea + '</div></div><div class="info"><p class="type">類型：' + placeType + '</p><p>地址：' + placeAddress + '</p><p>電話：' + placeTel + '</p><a href="javascript:;" class="detail">景點介紹</a></div></li>';
-
-			str += place;  
-		}
-
-	}  
-	placesList.innerHTML = str;
-}
 
 
 // 下拉選單地區切換
@@ -287,14 +280,13 @@ areaList.addEventListener('change', function (e) { 
 			// 更新地圖位置
 			areaLat = 25.0369639;
 			areaLng = 121.5361861;
-			// renderData();
-			viewDetail.innerHTML = '';
+			renderData('', 10);
 			initMap();
 		} else if (currentValue === areaLocation[i].area) {
 			// 更新地圖位置
 			areaLat = areaLocation[i].location.lat;
 			areaLng = areaLocation[i].location.lng;
-			filterData(currentValue);
+			renderData(currentValue);
 			initMap();
 		}
 	}
@@ -372,12 +364,33 @@ $(window).on('scroll', function () {
 });
 
 // 載入資料
-// window.onload = renderData();
+window.onload = renderData('',10);
 
 
 
 
 
+
+
+
+
+//  舊的篩選資料
+// function filterData(area) {  
+// 	var str = ''; 
+// 	var placesList = document.querySelector('.places-list');  
+// 	placesList.innerHTML = '';
+// 	for (var i = 0; i < data.length; i++) {
+// 		if (area === data[i].address.substr(5, 3)) {
+
+// 			var newData = originData(i);
+// 			str += newData;
+// 		}
+
+// 	}  
+// 	// console.log(newData);
+// 	// placesList.innerHTML = str;
+// 	placesList.innerHTML = str;
+// }
 
 
 
@@ -389,14 +402,14 @@ $(window).on('scroll', function () {
 // console.log(totalPage);
 // var ul_list = document.createElement('ul');
 // ul_list.setAttribute('class', 'pages');
-//
+
 // var str = '';
 // for (var i = 0; i < totalPage; i++){
 // 	var pageNo = '<li><a href="javascript:;" class="pageNo" data-page="' + (i+1) + '">'+ (i+1) +'</a></li>';
 // 	str += pageNo;
 // }
 // ul_list.innerHTML = str;
-//
+
 // document.querySelector('.views .container').appendChild(ul_list);
 
 
