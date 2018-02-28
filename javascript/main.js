@@ -287,7 +287,8 @@ areaList.addEventListener('change', function (e) { 
 			// 更新地圖位置
 			areaLat = 25.0369639;
 			areaLng = 121.5361861;
-			renderData();
+			// renderData();
+			viewDetail.innerHTML = '';
 			initMap();
 		} else if (currentValue === areaLocation[i].area) {
 			// 更新地圖位置
@@ -371,7 +372,7 @@ $(window).on('scroll', function () {
 });
 
 // 載入資料
-window.onload = renderData();
+// window.onload = renderData();
 
 
 
