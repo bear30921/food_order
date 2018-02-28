@@ -254,11 +254,13 @@ function renderData(area = '', dataCount = data.length) {
 			flag = true;
 			var newData = originData(i);
 			matchData += newData;
-		} 
 		// 網頁載入時預設呈現資料
+		} else if (area === '台北市') {
 			var newData = originData(i);
 			defaultData += newData;
+		}
 	} 
+
 	// flag 預設是false，當下拉選單有值條件成立，flag變成true
 	if (flag) {
 		placesList.innerHTML = matchData;
@@ -280,7 +282,7 @@ areaList.addEventListener('change', function (e) { 
 			// 更新地圖位置
 			areaLat = 25.0369639;
 			areaLng = 121.5361861;
-			renderData('', 10);
+			renderData(currentValue, 10);
 			initMap();
 		} else if (currentValue === areaLocation[i].area) {
 			// 更新地圖位置
@@ -364,7 +366,7 @@ $(window).on('scroll', function () {
 });
 
 // 載入資料
-window.onload = renderData('',10);
+window.onload = renderData('台北市',10);
 
 
 
