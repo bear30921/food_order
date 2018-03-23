@@ -31,5 +31,10 @@ var vm = new Vue({
 			var currentPosition = this.cart.indexOf(goods);
 			this.cart.splice(currentPosition, 1);
 		}
+	},
+	computed: {
+		cartCount: function () {
+			return this.cart.length;
+		}
 	}
 });
