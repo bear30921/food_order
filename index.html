@@ -11,23 +11,37 @@
 
 <body>
 	<div id="app">
-		<ul>
-			<li class="food row" v-for="(food, index) in foods">
-				<div class="food-picture col-3">
-					<img :src="food.picture" alt="food">
-				</div>
-				<div class="food-name col-3">
-					<span>{{food.name}}</span>
-				</div>
-				<div class="food-number col-3">
-					<span>{{food.count || 0}}</span>
-					<button v-on:click="increase(index)">+</button>
-				</div>
-				<div class="food-price col-3">
-					<span>${{food.price}}元</span>
-				</div>
-			</li>
-		</ul>
+		<section class="content">
+			<div class="container">
+				<ul class="food">
+					<li class="row" v-for="(food, index) in foods">
+						<div class="food-picture col-8">
+							<img :src="food.picture" alt="food">
+						</div>
+						<div class="food-info col-4">
+							<div class="food-name">
+								<span>餐點：{{food.name}}</span>
+							</div>
+							<div class="food-type">
+								<span>類型：{{food.type}}</span>
+							</div>
+							<div class="food-number">
+								<a href="javascript:;" v-on:click="decrease(index)">-</a>
+								<span>{{food.count || 0}}</span>
+								<a href="javascript:;" v-on:click="increase(index)">+</a>
+							</div>
+							<div class="food-price">
+								<span>價格：${{food.price}}元</span>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<div class="cart">
+			{{cart}}
+			<!-- <span class="cart-count>2</span> -->
+		</div>
 	</div>
 
 
