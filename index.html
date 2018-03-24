@@ -11,6 +11,8 @@
 
 <body>
 	<div id="app">
+		{{cart}}
+
 		<section class="content">
 			<div class="container">
 				<ul class="food">
@@ -39,36 +41,33 @@
 			</div>
 		</section>
 		<div class="cart-info">
-			<div class="container">
-				<ul>
-					<li class="row" v-for="(food, index) in cart">
-						<div class="food-infos">
-							<div class="food-picture col-2">
-								<img :src="food.picture" alt="food">
-							</div>
-							<div class="food-name col-2">
-								<span>{{food.name}}</span>
-							</div>
-							<div class="food-type col-2">
-								<span>{{food.type}}</span>
-							</div>
-							<div class="food-price col-2">
-								<span>${{food.price}}元</span>
-							</div>
-							<div class="food-count col-2">
-								<span>{{food.count}}份</span>
-							</div>
-							<div class="food-remove col-2">
-								<a href="javascript:;" v-on:click="removeCart(foods[index])">移除</a>
-							</div>
+			<ul>
+				<li class="row" v-for="(food, index) in cart">
+					<div class="food-infos">
+						<div class="food-picture col-2">
+							<img :src="food.picture" alt="food">
 						</div>
-					</li>
+						<div class="food-name col-2">
+							<span>{{food.name}}</span>
+						</div>
+						<div class="food-type col-2">
+							<span>{{food.type}}</span>
+						</div>
+						<div class="food-price col-2">
+							<span>${{food.price}}元</span>
+						</div>
+						<div class="food-count col-2">
+							<span>{{food.count}}份</span>
+						</div>
+						<div class="food-remove col-2">
+							<a href="javascript:;" v-on:click="removeCart(food)">移除</a>
+						</div>
+					</div>
+				</li>
 
-				</ul>
-			</div>
+			</ul>
 		</div>
 		<div class="cart">
-			<!-- {{cart}} -->
 			<span class="cart-number">{{cartCount}}</span>
 		</div>
 	</div>
