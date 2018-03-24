@@ -11,14 +11,27 @@
 
 <body>
 	<div id="app">
-		{{cart}}
-
+		<h1>輕食饗宴</h1>
 		<section class="content">
 			<div class="container">
-				<ul class="food">
-					<li class="row" v-for="(food, index) in foods">
+				<ul class="menu clearfix">
+					<li>
+						<a href="javascript:;" v-on:click="menuToggle(1, $event)" :class="{bg: activeBg === 1}">全部</a>
+					</li>
+					<li>
+						<a href="javascript:;" v-on:click="menuToggle(2, $event)" :class="{bg: activeBg === 2}">主食</a>
+					</li>
+					<li>
+						<a href="javascript:;" v-on:click="menuToggle(3, $event)" :class="{bg: activeBg === 3}">點心</a>
+					</li>
+					<li>
+						<a href="javascript:;" v-on:click="menuToggle(4, $event)" :class="{bg: activeBg === 4}">飲料</a>
+					</li>
+				</ul>
+				<ul class="food" v-if="true">
+					<li class="row" v-for="(food, index) in filterFood(foodCategory)">
 						<div class="food-picture col-8">
-							<img :src="food.picture" alt="food">
+							<img :src="food.picture" :alt="food.name">
 						</div>
 						<div class="food-info col-4">
 							<div class="food-name">
@@ -79,7 +92,7 @@
 					<span>${{cartCheckout}}</span>
 				</p>
 				<p class="leave">
-					<span v-show="cartValidation">無結帳項目</span>
+					<span v-show="paymentValidation">無結帳項目</span>
 					<a href="javascript:;" v-on:click="payment">結帳</a>
 					<a href="javascript:;" v-on:click="leave">離開</a>
 				</p>

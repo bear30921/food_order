@@ -4,12 +4,31 @@ var vm = new Vue({
 		foods: foodData,
 		cart: [],
 		cartInfo: false,
-		cartValidation: false
+		paymentValidation: false,
+		foodCategory: '',
+		activeBg: 1
 	},
 	methods: {
+		// 食物種類選單切換
+		menuToggle: function (menuType, e) {
+			this.activeBg = menuType;
+			var currentMenu = e.target.text;
+			this.foodCategory = currentMenu === '全部' ? '' : currentMenu;
+		},
+		// 食物種類資料篩選
+		filterFood: function (category) {
+			if (category !== "") {
+				var currentFood = this.foods.filter(function (food) {
+					return food.type === category;
+				});
+				return currentFood;
+			} else {
+				return this.foods;
+			}
+		},
 		// 增加食物數量
 		increase: function (index) {
-			this.cartValidation = false;
+			this.paymentValidation = false;
 			var currentFood = this.foods[index];
 			// 一開始json沒有定義count，所以會等於undefined ，或食物數量等於0
 			if (currentFood.count === undefined || currentFood.count === 0) {
@@ -48,38 +67,42 @@ var vm = new Vue({
 				this.foods[foodPosition].count = 0;
 			}
 		},
+		// 打開購物車
 		open: function () {
 			this.cartInfo = true;
 		},
+		// 關閉購物車
 		leave: function () {
 			this.cartInfo = false;
-			this.cartValidation = false;
+			this.paymentValidation = false;
 		},
+		// 結帳驗證
 		payment: function () {
 			if (this.cart.length > 0) {
 				this.leave();
 				var amount = this.cartCheckout;
-				this.cartValidation = false;
+				this.paymentValidation = false;
 				setTimeout(function () {
 					alert('感謝您！ 本次消費金額總共$' + amount + '已全數結清，請耐心等候餐點');
 				}, 1000);
 				// 食物清單數量歸0
-				for (var i = 0; i < this.cart.length; i++){
+				for (var i = 0; i < this.cart.length; i++) {
 					this.cart[i].count = 0;
 				}
 				// 清空購物車
 				this.cart = [];
 			} else {
-				this.cartValidation = true;
+				this.paymentValidation = true;
 			}
 		},
-		
+
 	},
 	computed: {
 		// 購物車數量
 		cartCount: function () {
 			return this.cart.length;
 		},
+		// 結帳
 		cartCheckout: function () {
 			var amount = 0;
 			if (this.cart.length > 0) {

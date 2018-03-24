@@ -36,7 +36,37 @@
 	transition: all .8s ease;
 }
 
+.bg {
+	background-color: yellow !important;
+	color: black !important;
+}
 
+
+h1 {
+	font-size: 3em;
+	text-align: center;
+	padding-top: 50px;
+}
+
+.menu {
+	> li {
+		display: inline-block;
+		margin-bottom: 40px;
+		
+		a {
+			display: inline-block;
+			padding: 10px 40px;
+			background-color: orange;
+			color: white;
+			transition: all .3s;
+			@include prefix(border-radius, 3px);
+			&:hover {
+				background-color: darken(orange, 5%);
+			}
+		}
+
+	}
+}
 
 .food {
 	overflow: hidden;
