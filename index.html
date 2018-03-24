@@ -41,9 +41,9 @@
 								<span>類型：{{food.type}}</span>
 							</div>
 							<div class="food-number">
-								<a href="javascript:;" v-on:click="decrease(index)">-</a>
+								<a href="javascript:;" v-on:click="decrease(food)">-</a>
 								<span>{{food.count || 0}}</span>
-								<a href="javascript:;" v-on:click="increase(index)">+</a>
+								<a href="javascript:;" v-on:click="increase(food)">+</a>
 							</div>
 							<div class="food-price">
 								<span>價格：${{food.price}}元</span>

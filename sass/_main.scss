@@ -4,7 +4,7 @@
 
 .col-4,
 .col-8 {
-	float: left;
+	// float: left;
 }
 
 .container {
@@ -41,6 +41,12 @@
 	color: black !important;
 }
 
+body {
+	// background-image: url(../img/bg.jpg);
+	// background-size: cover;
+	// background-repeat: no-repeat;
+	// background-attachment: fixed;
+}
 
 h1 {
 	font-size: 3em;
@@ -49,10 +55,9 @@ h1 {
 }
 
 .menu {
-	> li {
+	>li {
 		display: inline-block;
 		margin-bottom: 40px;
-		
 		a {
 			display: inline-block;
 			padding: 10px 40px;
@@ -64,13 +69,20 @@ h1 {
 				background-color: darken(orange, 5%);
 			}
 		}
-
 	}
 }
 
 .food {
 	overflow: hidden;
 	text-align: center;
+	font-size: 0;
+	.food-picture,
+	.food-info {
+		display: inline-block;
+		vertical-align: middle;
+		font-size: 16px;
+	}
+
 	>li {
 		&:not(:first-child) {
 			margin-top: 50px;
@@ -120,6 +132,7 @@ h1 {
 	h2 {
 		text-align: center;
 		font-size: 2em;
+		margin-bottom: 50px;
 	}
 	.note {
 		margin: 0 auto;
