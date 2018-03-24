@@ -1,9 +1,9 @@
 * {
-	border: 1px solid grey;
+	// border: 1px solid grey;
 }
 
-
-.col-4, .col-8 {
+.col-4,
+.col-8 {
 	float: left;
 }
 
@@ -14,6 +14,29 @@
 	padding-left: 50px;
 	max-width: 900px;
 }
+
+.fade-cart-enter,
+.fade-cart-leave-to {
+	opacity: 0;
+	transform: translate(50%, -50%) !important;
+}
+
+.fade-cart-enter-active,
+.fade-cart-leave-active {
+	transition: all .8s ease;
+}
+
+.fade-note-enter,
+.fade-note-leave-to {
+	opacity: 0;
+}
+
+.fade-note-enter-active,
+.fade-note-leave-active {
+	transition: all .8s ease;
+}
+
+
 
 .food {
 	overflow: hidden;
@@ -59,13 +82,32 @@
 	overflow: scroll;
 	padding: 50px;
 	max-width: 900px;
+	max-height: 500px;
 	width: 100%;
-	height: 500px;
 	background-color: white;
-	font-size: 0;
-
 	@include prefix(box-shadow, 0px 5px 30px -5px #777);
 	@include prefix(transform, translate(-50%, -50%));
+	h2 {
+		text-align: center;
+		font-size: 2em;
+	}
+	.note {
+		margin: 0 auto;
+		width: 50%;
+		text-align: center;
+		p {
+			font-weight: bold;
+			font-size: 1.8em;
+		}
+	}
+	.row {
+		&:not(:first-child) {
+			margin-top: 20px;
+		}
+	}
+	.food-infos {
+		font-size: 0;
+	}
 	.col-2 {
 		display: inline-block;
 		vertical-align: middle;
@@ -73,18 +115,33 @@
 		font-size: 16px;
 	}
 	.food-picture {
-		> img {
+		>img {
 			width: 100%;
 		}
 	}
 	.food-remove {
-		> a {
+		>a {
 			display: inline-block;
 			padding: 5px 20px;
+			width: 100%;
 			background-color: rgb(232, 9, 9);
 			color: white;
-
 			@include prefix(border-radius, 2px);
+		}
+	}
+	.checkout {
+		text-align: right;
+		b {
+			color: red;
+		}
+	}
+	.leave {
+		text-align: right;
+		span {
+			color: red;
+		}
+		a {
+			color: orange;
 		}
 	}
 }
@@ -95,11 +152,11 @@
 	bottom: 10px;
 	width: 80px;
 	height: 80px;
+	cursor: pointer;
 	background-color: yellow;
 	background-image: url(../img/cart.png);
 	background-size: cover;
 	background-repeat: no-repeat;
-
 	@include prefix(border-radius, 50%);
 	@include prefix(box-shadow, 0px 3px 10px -4px #777);
 	.cart-number {
@@ -109,7 +166,6 @@
 		color: red;
 		font-weight: bold;
 		font-size: 1.5em;
-
 		@include prefix(transform, translate(-50%, -50%));
 	}
 }
