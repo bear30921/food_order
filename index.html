@@ -56,46 +56,48 @@
 		<transition name="fade-cart">
 			<div class="cart-info" v-show="cartInfo">
 				<h2>結帳</h2>
-				<transition name="fade-note" mode="out-in">
-					<div class="note" v-if="cart.length === 0">
-						<p>無餐點</p>
-					</div>
-					<ul v-else>
-						<transition-group name="fade-note" mode="out-in" tag="div">
-							<li class="row" v-for="(food, index) in cart" :key="index">
-								<div class="food-infos">
-									<div class="food-picture col-2">
-										<img :src="food.picture" alt="food">
+				<div class="box">
+					<transition name="fade-note" mode="out-in">
+						<div class="note" v-if="cart.length === 0">
+							<p>無餐點</p>
+						</div>
+						<ul v-else>
+							<transition-group name="fade-note" mode="out-in" tag="div">
+								<li class="row" v-for="(food, index) in cart" :key="index">
+									<div class="food-infos">
+										<div class="food-picture col-2">
+											<img :src="food.picture" alt="food">
+										</div>
+										<div class="food-name col-2">
+											<span>{{food.name}}</span>
+										</div>
+										<div class="food-type col-2">
+											<span>{{food.type}}</span>
+										</div>
+										<div class="food-price col-2">
+											<span>${{food.price}}元</span>
+										</div>
+										<div class="food-count col-2">
+											<span>{{food.count}}份</span>
+										</div>
+										<div class="food-remove col-2">
+											<a href="javascript:;" v-on:click="removeCart(food)">移除</a>
+										</div>
 									</div>
-									<div class="food-name col-2">
-										<span>{{food.name}}</span>
-									</div>
-									<div class="food-type col-2">
-										<span>{{food.type}}</span>
-									</div>
-									<div class="food-price col-2">
-										<span>${{food.price}}元</span>
-									</div>
-									<div class="food-count col-2">
-										<span>{{food.count}}份</span>
-									</div>
-									<div class="food-remove col-2">
-										<a href="javascript:;" v-on:click="removeCart(food)">移除</a>
-									</div>
-								</div>
-							</li>
-						</transition-group>
-					</ul>
-				</transition>
-				<p class="checkout">
-					<b>總計：</b>
-					<span>${{cartCheckout}}</span>
-				</p>
-				<p class="leave">
-					<span v-show="paymentValidation">無結帳項目</span>
-					<a href="javascript:;" v-on:click="payment">結帳</a>
-					<a href="javascript:;" v-on:click="leave">離開</a>
-				</p>
+								</li>
+							</transition-group>
+						</ul>
+					</transition>
+					<p class="checkout">
+						<b>總計：</b>
+						<span>${{cartCheckout}}</span>
+					</p>
+					<p class="leave">
+						<span v-show="paymentValidation">無結帳項目</span>
+						<a href="javascript:;" v-on:click="payment">結帳</a>
+						<a href="javascript:;" v-on:click="leave">離開</a>
+					</p>
+				</div>
 			</div>
 		</transition>
 

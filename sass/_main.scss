@@ -42,16 +42,18 @@
 }
 
 body {
-	// background-image: url(../img/bg.jpg);
-	// background-size: cover;
-	// background-repeat: no-repeat;
-	// background-attachment: fixed;
+	background-image: url(../img/bg2.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
 
 h1 {
 	font-size: 3em;
 	text-align: center;
 	padding-top: 50px;
+	color: white;
+	text-shadow: 0px 1px 3px #800000;
 }
 
 .menu {
@@ -76,13 +78,20 @@ h1 {
 	overflow: hidden;
 	text-align: center;
 	font-size: 0;
+	.row {
+		color: black;
+		background-color: white;
+	}
 	.food-picture,
 	.food-info {
 		display: inline-block;
 		vertical-align: middle;
 		font-size: 16px;
 	}
-
+	.food-info {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
 	>li {
 		&:not(:first-child) {
 			margin-top: 50px;
@@ -121,14 +130,16 @@ h1 {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	overflow: scroll;
 	padding: 50px;
 	max-width: 900px;
-	max-height: 500px;
 	width: 100%;
 	background-color: white;
 	@include prefix(box-shadow, 0px 5px 30px -5px #777);
 	@include prefix(transform, translate(-50%, -50%));
+	.box {
+		max-height: 500px;
+		overflow: scroll;
+	}
 	h2 {
 		text-align: center;
 		font-size: 2em;
